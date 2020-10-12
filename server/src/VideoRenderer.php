@@ -59,19 +59,20 @@ class VideoRenderer
             . $mp4File
         );
 
-        exec($this->vegasPath
-            . ' -SCRIPT:"'
-            . __DIR__
-            . DIRECTORY_SEPARATOR
-            . '..'
-            . DIRECTORY_SEPARATOR
-            . '..'
-            . DIRECTORY_SEPARATOR
-            . 'RenderProject'
-            . DIRECTORY_SEPARATOR
-            . 'RenderProject'
-            . DIRECTORY_SEPARATOR
-            . 'class1.cs"'
+        exec(
+            $this->vegasPath
+                . ' -SCRIPT:"'
+                . __DIR__
+                . DIRECTORY_SEPARATOR
+                . '..'
+                . DIRECTORY_SEPARATOR
+                . '..'
+                . DIRECTORY_SEPARATOR
+                . 'RenderProject'
+                . DIRECTORY_SEPARATOR
+                . 'RenderProject'
+                . DIRECTORY_SEPARATOR
+                . 'class1.cs"'
         );
 
         return $mp4File;
