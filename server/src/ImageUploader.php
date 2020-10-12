@@ -28,8 +28,9 @@ class ImageUploader
 
     private function generateNewImage(string $uploadedImage, int $i = 1): string
     {
-        $originalImagePath = __DIR__ . '/../public/images/' . $i . '_original.png';
-        $memeImagePath = __DIR__ . '/../public/images/' . $i . '_sized.png';
+        $imageFolder = __DIR__ . '/../public/images/';
+        $originalImagePath = $imageFolder . $i . '_original.png';
+        $memeImagePath = $imageFolder . $i . '_sized.png';
         if (! file_exists($originalImagePath)) {
             copy($uploadedImage, $originalImagePath);
             $manager = new ImageManager(['driver' => 'imagick']);
