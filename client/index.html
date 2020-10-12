@@ -1,7 +1,37 @@
 <head>
     <title>Tiktok Meme Poster</title>
+    <style>
+
+        .center {
+            text-align: center;
+        }
+
+        #legend-label {
+            display: block;
+            font-size: 18px;
+        }
+
+        #legend {
+            width: 400px;
+            height: 200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #loading {
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+    </style>
 </head>
-<body>
+<body class="center">
     <h1>TikTok Meme Poster</h1>
+    <label for="legend" id="legend-label">Légende</label>
+    <textarea id="legend">
+
+#meme #memedev #developpeur #developpement #informatique</textarea>
+    <div id="loading" style="display: none;">Chargement...</div>
     <script src="./index.js"></script>
 </body>

@@ -2,3 +2,4 @@ config.json
 node_modules
 server/vendor
 tmp.csv
+tiktoks.json

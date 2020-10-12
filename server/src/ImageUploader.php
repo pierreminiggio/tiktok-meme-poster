@@ -6,21 +6,17 @@ use Intervention\Image\ImageManager;
 
 class ImageUploader
 {
-    public function upload(?array $image)
+    public function upload(?array $image): string
     {
         if (! $image) {
-            echo json_encode([
+            return json_encode([
                 'error' => 'Pas d\'image'
             ]);
-
-            return;
         }
         if ($image['error']) {
-            echo json_encode([
+            return json_encode([
                 'error' => $image['error']
             ]);
-
-            return;
         }
 
         $newImagePath = $this->generateNewImage($image['tmp_name']);
@@ -36,6 +32,8 @@ class ImageUploader
         ), true);
 
         $videoPath = (new VideoRenderer($config['vegasPath']))->render($newImagePath);
+
+        return json_encode(['video' => $videoPath]);
     }
 
     private function generateNewImage(string $uploadedImage, int $i = 1): string
