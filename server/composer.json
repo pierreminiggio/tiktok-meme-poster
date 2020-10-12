@@ -11,5 +11,7 @@
             "email": "pierre@miniggiodev.fr"
         }
     ],
-    "require": {}
+    "require": {
+        "intervention/image": "^2.5"
+    }
 }
