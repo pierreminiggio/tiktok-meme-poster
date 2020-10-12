@@ -21,18 +21,18 @@ class ImageUploader
             return;
         }
 
-        $newImagePath = $this->getNewImagePath();
+        $newImagePath = $this->generateNewImage();
 
         copy($image['tmp_name'], $newImagePath);
     }
 
-    private function getNewImagePath(int $i = 1): string
+    private function generateNewImage(int $i = 1): string
     {
-        $newImagePath = __DIR__ . '/../public/images/' . $i . '.png';
+        $newImagePath = __DIR__ . '/../public/images/' . $i . '_original.png';
         if (! file_exists($newImagePath)) {
             return $newImagePath;
         }
 
-        return $this->getNewImagePath($i + 1);
+        return $this->generateNewImage($i + 1);
     }
 }
