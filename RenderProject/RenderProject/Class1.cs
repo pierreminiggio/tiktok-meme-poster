@@ -49,8 +49,10 @@ namespace RenderProject
                     cursorPosition,
                     Timecode.FromMilliseconds(duration)
                 );
-                
-                if (renderProject(myVegas, configArray[3]))
+
+                myVegas.SaveProject(configArray[3]);
+
+                if (renderProject(myVegas, configArray[4]))
                 {
                     // Success
                     myVegas.Exit();
