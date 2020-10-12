@@ -20,7 +20,7 @@ namespace RenderProject
             try
             {
                 myVegas.NewProject();
-                myVegas.Project.Video.Height = 2920;
+                myVegas.Project.Video.Height = 1920;
                 myVegas.Project.Video.Width = 1080;
 
                 VideoTrack videoTrack = new VideoTrack(myVegas.Project, 0, "Meme");

@@ -24,11 +24,31 @@ class ImageUploader
         }
 
         $newImagePath = $this->generateNewImage($image['tmp_name']);
+
+        $config = json_decode(file_get_contents(
+            __DIR__
+            . DIRECTORY_SEPARATOR
+            . '..'
+            . DIRECTORY_SEPARATOR
+            . '..'
+            . DIRECTORY_SEPARATOR
+            . 'config.json'
+        ), true);
+
+        $videoPath = (new VideoRenderer($config['vegasPath']))->render($newImagePath);
     }
 
     private function generateNewImage(string $uploadedImage, int $i = 1): string
     {
-        $imageFolder = __DIR__ . '/../public/images/';
+        $imageFolder = __DIR__
+            . DIRECTORY_SEPARATOR
+            . '..'
+            . DIRECTORY_SEPARATOR
+            . 'public'
+            . DIRECTORY_SEPARATOR
+            . 'images'
+            . DIRECTORY_SEPARATOR
+        ;
         $originalImagePath = $imageFolder . $i . '_original.png';
         $memeImagePath = $imageFolder . $i . '_sized.png';
         if (! file_exists($originalImagePath)) {
