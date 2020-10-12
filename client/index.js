@@ -2,6 +2,13 @@ const server = 'http://localhost:8083'
 
 /** @type {HTMLTextAreaElement} */
 const textArea = document.getElementById('legend')
+textArea.addEventListener('input', () => {
+    const max = 150
+    if (textArea.value.length >= max) {
+        textArea.value = textArea.value.substring(0, max);
+    }
+})
+    
 
 /** @type {HTMLLabelElement} */
 const label = document.getElementById('legend-label')
