@@ -56,7 +56,8 @@ class ImageUploader
 
             $originalWidth = $image->width();
             $originalHeight = $image->height();
-            if ($originalWidth > $originalHeight) {
+
+            if (($originalHeight / $originalWidth) < (1280 / 720)) {
                 $width = 1080;
                 $height = (int) ((1080 / $originalWidth) * $originalHeight);
             } else {
