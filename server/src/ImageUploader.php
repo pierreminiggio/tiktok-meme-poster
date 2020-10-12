@@ -20,7 +20,19 @@ class ImageUploader
 
             return;
         }
-        var_dump($image);
-        echo 'test upload';
+
+        $newImagePath = $this->getNewImagePath();
+
+        copy($image['tmp_name'], $newImagePath);
+    }
+
+    private function getNewImagePath(int $i = 1): string
+    {
+        $newImagePath = __DIR__ . '/../public/images/' . $i . '.png';
+        if (! file_exists($newImagePath)) {
+            return $newImagePath;
+        }
+
+        return $this->getNewImagePath($i + 1);
     }
 }

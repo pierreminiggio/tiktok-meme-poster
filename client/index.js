@@ -4,7 +4,8 @@ window.addEventListener('paste', async e => {
     const files = e.clipboardData.files
     if (files.length && files[0] instanceof File) {
         const image = files[0]
-        await sendImage(image)
+        const responseText = await sendImage(image)
+        alert(responseText)
     }
 });
 
@@ -18,7 +19,7 @@ function sendImage(image) {
         const xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (this.readyState === 4 && this.status == 200) {
-                resolve()
+                resolve(this.responseText)
             }
         };
         xhttp.open('POST', server + '/upload', true);
