@@ -29,6 +29,12 @@ class VideoRenderer
         $imageName = $splitedPaths[count($splitedPaths) - 1];
 
         $fileBaseName = str_replace('_sized', '', explode('.', $imageName)[0]);
+
+        $mp3Folder = $publicPath
+            . 'musiques'
+            . DIRECTORY_SEPARATOR
+        ;
+
         $mp4File = $publicPath
             . 'videos'
             . DIRECTORY_SEPARATOR
@@ -45,9 +51,7 @@ class VideoRenderer
             . 'tmp.csv',
             $imagePath
             . ';'
-            . $publicPath
-            . 'musiques'
-            . DIRECTORY_SEPARATOR
+            . $mp3Folder
             . 'coffin-dance-9.mp3;'
             . 7000
             . ';'
