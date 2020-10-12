@@ -17,11 +17,13 @@ function sendImage(image) {
     return new Promise(resolve => {
         const xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
+            if (this.readyState === 4 && this.status == 200) {
                 resolve()
             }
         };
-        xhttp.open('GET', server + '/upload', true);
-        xhttp.send();
+        xhttp.open('POST', server + '/upload', true);
+        const formData = new FormData();
+        formData.append('image', image);
+        xhttp.send(formData);
     })
 }
