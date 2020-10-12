@@ -2,9 +2,11 @@
     "name": "tiktok-meme-poster",
     "version": "1.0.0",
     "description": "Post an image meme as a video on tiktok",
-    "main": "main.js",
+    "main": "client.js",
     "scripts": {
-      "start": "node main.js",
+      "start": "npm run-script client && npm run-script server",
+      "client": "node client.js",
+      "server": "php -S localhost:8083 ./server/index.php",
       "test": "echo \"Error: no test specified\" && exit 1"
     },
     "repository": {
