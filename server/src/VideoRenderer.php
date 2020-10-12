@@ -2,6 +2,8 @@
 
 namespace App;
 
+use wapmorgan\Mp3Info\Mp3Info;
+
 class VideoRenderer
 {
 
@@ -38,6 +40,8 @@ class VideoRenderer
             return $songName !== '.' && $songName !== '..' && substr($songName, -4) === '.mp3';
         });
         $randomSong = $songs[array_rand($songs)];
+        $audio = new Mp3Info($mp3Folder . $randomSong, true);
+        $durationMiliseconds = (int) ($audio->duration * 1000);
 
         $mp4File = $publicPath
             . 'videos'
@@ -58,7 +62,7 @@ class VideoRenderer
             . $mp3Folder
             . $randomSong
             . ';'
-            . 7000
+            . $durationMiliseconds
             . ';'
             . $publicPath
             . 'projets'

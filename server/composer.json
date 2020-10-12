@@ -12,6 +12,7 @@
         }
     ],
     "require": {
-        "intervention/image": "^2.5"
+        "intervention/image": "^2.5",
+        "wapmorgan/mp3info": "^0.0.5"
     }
 }
