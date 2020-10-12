@@ -34,6 +34,10 @@ class VideoRenderer
             . 'musiques'
             . DIRECTORY_SEPARATOR
         ;
+        $songs = array_filter(scandir($mp3Folder), function (string $songName) {
+            return $songName !== '.' && $songName !== '..' && substr($songName, -4) === '.mp3';
+        });
+        $randomSong = $songs[array_rand($songs)];
 
         $mp4File = $publicPath
             . 'videos'
@@ -52,7 +56,8 @@ class VideoRenderer
             $imagePath
             . ';'
             . $mp3Folder
-            . 'coffin-dance-9.mp3;'
+            . $randomSong
+            . ';'
             . 7000
             . ';'
             . $publicPath
