@@ -21,18 +21,19 @@ class ImageUploader
             return;
         }
 
-        $newImagePath = $this->generateNewImage();
-
-        copy($image['tmp_name'], $newImagePath);
+        $newImagePath = $this->generateNewImage($image['tmp_name']);
     }
 
-    private function generateNewImage(int $i = 1): string
+    private function generateNewImage(string $uploadedImage, int $i = 1): string
     {
-        $newImagePath = __DIR__ . '/../public/images/' . $i . '_original.png';
-        if (! file_exists($newImagePath)) {
-            return $newImagePath;
+        $originalImagePath = __DIR__ . '/../public/images/' . $i . '_original.png';
+        $memeImagePath = __DIR__ . '/../public/images/' . $i . '_sized.png';
+        if (! file_exists($originalImagePath)) {
+            copy($uploadedImage, $originalImagePath);
+
+            return $originalImagePath;
         }
 
-        return $this->generateNewImage($i + 1);
+        return $this->generateNewImage($uploadedImage, $i + 1);
     }
 }
