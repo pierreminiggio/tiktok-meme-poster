@@ -14,6 +14,9 @@ namespace RenderProject
     {
         public void FromVegas(Vegas myVegas)
         {
+            string configString = File.ReadAllText("./tmp.csv");
+            string[] configArray = configString.Split(';');
+
             try
             {
                 myVegas.NewProject();
@@ -26,26 +29,37 @@ namespace RenderProject
                 AudioTrack audioTrack = new AudioTrack(myVegas.Project, 1, "Meme Music");
                 myVegas.Project.Tracks.Add(audioTrack);
 
-                string audioPath = "F:\\dev\\tiktok-meme-poster\\server\\public\\musiques\\coffin-dance-9.mp3";
-                int duration = 10000;
+                string audioPath = configArray[1];
+                int duration = int.Parse(configArray[2]);
 
                 AudioEvent audioEvent = (AudioEvent)AddMedia(
                     myVegas.Project,
                     audioPath,
                     1,
                     Timecode.FromSeconds(0),
-                    Timecode.FromMilliseconds(10000)
+                    Timecode.FromMilliseconds(duration)
                 );
 
                 Timecode cursorPosition = myVegas.Transport.CursorPosition;
-                string imagePath = "F:\\dev\\tiktok-meme-poster\\server\\public\\images\\1_sized.png";
+                string imagePath = configArray[0];
                 VideoEvent imageEvent = (VideoEvent)AddMedia(
                     myVegas.Project,
                     imagePath,
                     0,
                     cursorPosition,
-                    Timecode.FromMilliseconds(10000)
+                    Timecode.FromMilliseconds(duration)
                 );
+                
+                if (renderProject(myVegas, configArray[3]))
+                {
+                    // Success
+                    myVegas.Exit();
+                }
+                else
+                {
+                    // Failed
+                    myVegas.Exit();
+                }
             }
             catch (Exception ex)
             {
@@ -83,6 +97,42 @@ namespace RenderProject
             
             // Should be impossible
             return null;
+        }
+
+        private bool renderProject(
+            Vegas myVegas,
+            string outputFilePath
+        )
+        {
+            RenderArgs renderArgs = new RenderArgs(myVegas.Project);
+            renderArgs.RenderTemplate = findTemplate(myVegas.Renderers);
+            renderArgs.OutputFile = outputFilePath;
+            RenderStatus renderStatus = myVegas.Render(renderArgs);
+            if (renderStatus == RenderStatus.Complete)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private RenderTemplate findTemplate(Renderers renderers)
+        {
+            foreach (Renderer renderer in renderers)
+            {
+                if (renderer.FileTypeName == "MAGIX AVC/AAC MP4")
+                {
+                    foreach (RenderTemplate template in renderer.Templates)
+                    {
+                        if (template.Name == "Modèle par défaut")
+                        {
+                            return template;
+                        }
+                    }
+                }
+            }
+
+            throw new Exception("Template not found");
         }
     }
 }
