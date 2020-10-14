@@ -7,6 +7,7 @@
     "start": "npm run-script client && npm run-script server",
     "client": "node client.js",
     "server": "php -S localhost:8083 ./server/public/index.php",
+    "queue-poster": "node queuePoster.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
