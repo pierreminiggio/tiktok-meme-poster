@@ -22,6 +22,7 @@
   "homepage": "https://github.com/pierreminiggio/tiktok-meme-poster#readme",
   "dependencies": {
     "@pierreminiggio/tiktok-poster": "github:pierreminiggio/tiktok-poster",
-    "node": "^12.6.0"
+    "node": "^12.6.0",
+    "node-cron": "^2.0.3"
   }
 }

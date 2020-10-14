@@ -1,6 +1,7 @@
 const ids = require('./ids.json')
 const post = require('@pierreminiggio/tiktok-poster')
 const fs = require('fs')
+const cron = require('node-cron')
 
 /**
  * @typedef {Object} TikTok
@@ -46,4 +47,6 @@ function postFirstTikTokInQueue() {
     })
 }
 
-postFirstTikTokInQueue()
+cron.schedule('0 * * * *', () => {
+    postFirstTikTokInQueue()
+})
