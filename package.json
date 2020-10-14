@@ -1,25 +1,26 @@
 {
-    "name": "tiktok-meme-poster",
-    "version": "1.0.0",
-    "description": "Post an image meme as a video on tiktok",
-    "main": "client.js",
-    "scripts": {
-      "start": "npm run-script client && npm run-script server",
-      "client": "node client.js",
-      "server": "php -S localhost:8083 ./server/public/index.php",
-      "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "repository": {
-      "type": "git",
-      "url": "git+https://github.com/pierreminiggio/tiktok-meme-poster.git"
-    },
-    "author": "Pierre MINIGGIO",
-    "license": "ISC",
-    "bugs": {
-      "url": "https://github.com/pierreminiggio/tiktok-meme-poster/issues"
-    },
-    "homepage": "https://github.com/pierreminiggio/tiktok-meme-poster#readme",
-    "dependencies": {
-      "node": "^12.6.0"
-    }
+  "name": "tiktok-meme-poster",
+  "version": "1.0.0",
+  "description": "Post an image meme as a video on tiktok",
+  "main": "client.js",
+  "scripts": {
+    "start": "npm run-script client && npm run-script server",
+    "client": "node client.js",
+    "server": "php -S localhost:8083 ./server/public/index.php",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pierreminiggio/tiktok-meme-poster.git"
+  },
+  "author": "Pierre MINIGGIO",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pierreminiggio/tiktok-meme-poster/issues"
+  },
+  "homepage": "https://github.com/pierreminiggio/tiktok-meme-poster#readme",
+  "dependencies": {
+    "@pierreminiggio/tiktok-poster": "github:pierreminiggio/tiktok-poster",
+    "node": "^12.6.0"
+  }
 }
