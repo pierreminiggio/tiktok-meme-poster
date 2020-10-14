@@ -1,5 +1,7 @@
 config.json
+ids.json
 node_modules
 server/vendor
 tmp.csv
-tiktoks.json
+queue.json
+posted.json

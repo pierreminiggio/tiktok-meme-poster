@@ -18,7 +18,7 @@ $tiktoksStorage = __DIR__
     . DIRECTORY_SEPARATOR
     . '..'
     . DIRECTORY_SEPARATOR
-    . 'tiktoks.json'
+    . 'queue.json'
 ;
 
 switch ($_SERVER['REQUEST_URI']) {
