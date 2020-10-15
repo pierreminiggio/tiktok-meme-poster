@@ -1,7 +1,6 @@
 const ids = require('./ids.json')
 const post = require('@pierreminiggio/tiktok-poster')
 const fs = require('fs')
-const cron = require('node-cron')
 
 /**
  * @typedef {Object} TikTok
@@ -20,33 +19,43 @@ function postFirstTikTokInQueue() {
         const queueFile = './queue.json'
         const postedFile = './posted.json'
 
-        /** @type {TikTok[]} queue */
-        const queue = require(queueFile)
+        fs.readFile(queueFile, 'utf8', (err, queueFileData) => {
+            if (err) {
+                rejects()
+            }
 
-        /** @type {TikTok[]} posted */
-        const posted = require(postedFile)
+            /** @type {TikTok[]} queue */
+            const queue = JSON.parse(queueFileData)
 
-        if (queue.length) {
-            const key = 0
-            const toPost = queue[key]
-            await post(ids.login, ids.password, toPost.video, toPost.legend)
-            queue.splice(key, 1)
-            posted.push(toPost)
-            fs.writeFile(queueFile, JSON.stringify(queue), (err) => {
+            fs.readFile(postedFile, 'utf8', async (err, postedFileData) =>  {
                 if (err) {
                     rejects()
                 }
-                fs.writeFile(postedFile, JSON.stringify(posted), (err) => {
-                    if (err) {
-                        rejects()
-                    }
-                    resolve()
-                })
-            })
-        }
+
+                /** @type {TikTok[]} posted */
+                const posted = JSON.parse(postedFileData)
+
+                if (queue.length) {
+                    const key = 0
+                    const toPost = queue[key]
+                    await post(ids.login, ids.password, toPost.video, toPost.legend)
+                    queue.splice(key, 1)
+                    posted.push(toPost)
+                    fs.writeFile(queueFile, JSON.stringify(queue), (err) => {
+                        if (err) {
+                            rejects()
+                        }
+                        fs.writeFile(postedFile, JSON.stringify(posted), (err) => {
+                            if (err) {
+                                rejects()
+                            }
+                            resolve()
+                        })
+                    })
+                }
+            })  
+        })  
     })
 }
 
-cron.schedule('0 * * * *', () => {
-    postFirstTikTokInQueue()
-})
+module.exports = postFirstTikTokInQueue
