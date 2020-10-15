@@ -35,7 +35,11 @@ window.addEventListener('paste', async e => {
         if (textResponse) {
             const jsonResponse = JSON.parse(textResponse)
             if (jsonResponse.error) {
-                alert(jsonResponse.error)
+                if (jsonResponse.error === '1') {
+                    alert('Il y a eu une erreur, le fichier est probablement trop gros.')
+                } else {
+                    alert('Il y a eu une erreur : ' + jsonResponse.error)
+                }
             } else {
                 await saveTikTok(jsonResponse.video, textArea.value)
                 await loadTikToks()
