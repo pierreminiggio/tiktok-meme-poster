@@ -10,9 +10,11 @@ const fs = require('fs')
  */
 
  /**
+  * @param {boolean} show
+  * 
   * @returns {Promise}
   */
-function postFirstTikTokInQueue() {
+function postFirstTikTokInQueue(show = false) {
 
     return new Promise(async (resolve, rejects) => {
 
@@ -38,7 +40,7 @@ function postFirstTikTokInQueue() {
                 if (queue.length) {
                     const key = 0
                     const toPost = queue[key]
-                    await post(ids.login, ids.password, toPost.video, toPost.legend)
+                    await post(ids.login, ids.password, toPost.video, toPost.legend, ! show)
                     queue.splice(key, 1)
                     posted.push(toPost)
                     fs.writeFile(queueFile, JSON.stringify(queue), (err) => {
