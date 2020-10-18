@@ -16,14 +16,14 @@ const fs = require('fs')
   */
 function postFirstTikTokInQueue(show = true) {
 
-    return new Promise(async (resolve, rejects) => {
+    return new Promise(async (resolve, reject) => {
 
         const queueFile = './queue.json'
         const postedFile = './posted.json'
 
         fs.readFile(queueFile, 'utf8', (err, queueFileData) => {
             if (err) {
-                rejects()
+                reject()
             }
 
             /** @type {TikTok[]} queue */
@@ -31,7 +31,7 @@ function postFirstTikTokInQueue(show = true) {
 
             fs.readFile(postedFile, 'utf8', async (err, postedFileData) =>  {
                 if (err) {
-                    rejects()
+                    reject()
                 }
 
                 /** @type {TikTok[]} posted */
@@ -45,18 +45,19 @@ function postFirstTikTokInQueue(show = true) {
                         posted.push(toPost)
                         fs.writeFile(queueFile, JSON.stringify(queue), (err) => {
                             if (err) {
-                                rejects()
+                                reject()
                             }
                             fs.writeFile(postedFile, JSON.stringify(posted), (err) => {
                                 if (err) {
-                                    rejects()
+                                    reject()
                                 }
                                 resolve()
                             })
                         })
-                    }).catch((e) => {
+                    }).catch(async (e) => {
                         console.log('Erreur: ' + e)
-                        postFirstTikTokInQueue(show)
+                        await postFirstTikTokInQueue(show)
+                        resolve()
                     })
                 }
             })  
