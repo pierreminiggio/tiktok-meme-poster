@@ -4,6 +4,7 @@ Prérequis :
 - Un compte TikTok lié à un compte Facebook
 - NodeJS installé et l'exécutable node dans les variables d'environement
 - PHP 7.4 installé et l'exécutable php dans les variables d'environement
+- Composer installé  et l'exécutable php dans les variables d'environement
 - <a href="https://github.com/puppeteer/puppeteer">Ceux de Puppeteer</a>
 - Sony Vegas Pro Installé, <a href="https://www.youtube.com/watch?v=-sbZ7worIJw">tuto pour installer Vegas ici</a>
 
@@ -22,6 +23,9 @@ cd tiktok-meme-poster
 Installer les dépendances :
 ```
 npm install
+cd server
+composer install
+cd ../
 ```
 
 Initialiser les fichiers de stockage temporaire :
