@@ -59,6 +59,17 @@ function postFirstTikTokInQueue(show = true) {
                         await postFirstTikTokInQueue(show)
                         resolve()
                     })
+                } else if (posted.length) {
+                    const toPost = posted[Math.floor(Math.random() * posted.length)]
+                    post(ids.login, ids.password, toPost.video, toPost.legend, show).then(() => {
+                        resolve()
+                    }).catch(async (e) => {
+                        console.log('Erreur: ' + e)
+                        await postFirstTikTokInQueue(show)
+                        resolve()
+                    })
+                } else {
+                    reject('Nothing to post')
                 }
             })  
         })  
